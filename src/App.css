@@ -1,0 +1,19 @@
+nav.navbar {
+  background-color: #e41749;
+  position: relative;
+  padding: 0% 2%;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.navbrand:hover,
+.navbrand {
+  color: #353535;
+  font-size: 2em;
+  text-decoration: none;
+}
+
+@media (max-width: 720px) {
+}

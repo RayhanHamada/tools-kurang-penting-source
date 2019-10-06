@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles.css";
+import App from "./App";
 
-const MyClass = () => {return null;}
-
-ReactDOM.render(<MyClass />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));

@@ -1,0 +1,28 @@
+.box {
+  border: #e41749 1px solid;
+  padding: 6%;
+  height: 400px;
+}
+
+.tool-title {
+  font-size: 1.2em;
+  word-wrap: break-word;
+  text-decoration: none;
+  color: white;
+  text-underline-position: unset;
+}
+
+.title-separator {
+  background-color: #e41749;
+  padding: 0;
+  height: 2px;
+}
+
+.tool-desc {
+    margin-bottom: 5%;
+
+}
+
+.badge {
+    margin: 1% 1%;
+}
