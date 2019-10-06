@@ -9,12 +9,10 @@ const App = () => {
     <Router>
       <nav className="navbar">
         <a className="navbrand" href=".">
-          <span>Muffyn Tools</span>
+          <span>Tools Kurang Penting</span>
         </a>
         <p>
-          <b>M</b>aybe <b>U</b>seful <b>F</b>ounded <b>F</b>reazy <b>Y</b>our{" "}
-          <b>N</b>
-          owadays <b>T</b>ools
+          Anjay Mabar
         </p>
       </nav>
 

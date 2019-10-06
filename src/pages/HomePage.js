@@ -19,21 +19,6 @@ const HomePage = () => {
           toolDesc="Alat untuk menghitung distribusi frekuensi dan menyajikannya dalam tabel."
           toolTag={["Statistic", "Table"]}
         />
-        {/* <ToolBox
-          toolTitle="Simple market calculator"
-          toolAuthor="Rayhan Hamada"
-          toolDesc="A tool for calculate your market expenses"
-        />
-        <ToolBox
-          toolTitle="Simple market calculator"
-          toolAuthor="Rayhan Hamada"
-          toolDesc="A tool for calculate your market expenses"
-        />
-        <ToolBox
-          toolTitle="Simple market calculator"
-          toolAuthor="Rayhan Hamada"
-          toolDesc="A tool for calculate your market expenses"
-        /> */}
       </div>
     </div>
   );

@@ -17,7 +17,10 @@ const Tabulation = () => {
   const [state, setState] = useState({
     data: [],
     tableData: [],
+    jumlahData: 0,
     banyakData: 0,
+    mean: 0,
+    median: 0,
     banyakKelas: 0,
     banyakKelasFix: 0,
     min: 0,
@@ -47,6 +50,7 @@ const Tabulation = () => {
         return parseInt(val);
       });
 
+    const jumlahData = numArray.reduce((prev, curr) => prev + curr);
     const min = Math.min(...numArray);
     const max = Math.max(...numArray);
     const range = max - min;
@@ -75,6 +79,7 @@ const Tabulation = () => {
       data: [...numArray],
       banyakData: numArray.length,
       banyakKelas: banyakKelas,
+      jumlahData: jumlahData,
       max: max,
       min: min,
       range: range,
@@ -95,13 +100,9 @@ const Tabulation = () => {
   const bikinRecord = () => {
     const sortedData = [...state.data].sort((a, b) => a - b);
     const interval = state.intervalFix;
-    console.log(interval);
     const banyakKelas = state.banyakKelasFix;
-    console.log(banyakKelas);
     const banyakData = state.banyakData;
-    console.log(banyakData);
     const min = state.min;
-    console.log(min);
     const max = state.max;
     let currentRow = {
       kelas: "",
@@ -112,7 +113,6 @@ const Tabulation = () => {
       fkumkur: 0,
       fkumleb: 0
     };
-    console.log(sortedData);
     let rowContainer = [];
     let currentKelasMulai = min - 1;
     let currentKelasAkhir = currentKelasMulai + interval - 1;
@@ -124,15 +124,15 @@ const Tabulation = () => {
       // hitung frekuensi
       let frek = 0;
       for (let j = 0; j < sortedData.length; j++) {
-        if (sortedData[j] >= currentKelasMulai && sortedData[j] <= currentKelasAkhir) frek++;
+        if (
+          sortedData[j] >= currentKelasMulai &&
+          sortedData[j] <= currentKelasAkhir
+        )
+          frek++;
       }
 
-      console.log(frek);
-
       currentRow.frek = frek;
-      console.log(frek);
       currentRow.frel = (frek / banyakData).toPrecision(4);
-      console.log(currentRow.frel);
       currentRow.frelp = (currentRow.frel * 100).toPrecision(4);
 
       // hitung frekuensi kumulatif kurang dari
@@ -141,7 +141,7 @@ const Tabulation = () => {
         if (sortedData[k] < currentKelasMulai) kurangDari++;
       }
 
-      currentRow.fkumkur = kurangDari;
+      currentRow.fkumkur = `${kurangDari}  (< ${currentKelasMulai})`;
 
       // hitung frekuensi kumulatif lebih dari
       let lebihDari = 0;
@@ -149,7 +149,7 @@ const Tabulation = () => {
         if (sortedData[l] > currentKelasMulai - 1) lebihDari++;
       }
 
-      currentRow.fkumleb = lebihDari;
+      currentRow.fkumleb = `${lebihDari} (>${currentKelasMulai - 1})`;
 
       // masukin ke rowContainer
       rowContainer.push(currentRow);
@@ -159,7 +159,6 @@ const Tabulation = () => {
     }
 
     setState({ ...state, tableData: rowContainer });
-    console.log(rowContainer);
   };
 
   return (
@@ -173,15 +172,15 @@ const Tabulation = () => {
       />
       <br />
       <span className="jumlah-data white-text" id="jumlah-data">
-        Banyak Data : {state.banyakData}
+        Banyak Data : <b>{state.banyakData}</b>, Jumlah Data: <b>{state.jumlahData}</b>
       </span>
       <br />
       <span className="white-text">
-        Data Terkecil : {state.min}, Data Terbesar : {state.max}
+        Data Terkecil : <b>{state.min}</b>, Data Terbesar : <b>{state.max}</b>
       </span>
       <br />
       <span id="jumlah-kelas" className="white-text">
-        Banyak Kelas : {state.banyakKelas}
+        Banyak Kelas : <b>{state.banyakKelas}</b>
       </span>
       <br />
       <span className="white-text">Pilih Banyak Kelas Yang Fix !</span>
@@ -196,6 +195,7 @@ const Tabulation = () => {
             setUiState({ ...uiState, opcheck: true });
             setState({ ...state });
             hitungJumlahData();
+            bikinRecord();
           }}
         />
         {uiState.opsi1}
@@ -211,14 +211,15 @@ const Tabulation = () => {
             setUiState({ ...uiState, opcheck: !uiState.opcheck });
             setState({ ...state });
             hitungJumlahData();
+            bikinRecord();
           }}
         />
         {uiState.opsi2}
       </label>
       <br />
-      <span className="white-text">Range: {state.range}</span>
+      <span className="white-text">Range: <b>{state.range}</b></span>
       <br />
-      <span className="white-text">Interval : {state.interval}</span>
+      <span className="white-text">Interval : <b>{state.interval}</b></span>
       <br />
       <span className="white-text">Pilih Interval Yang Fix !</span>
       <label className="radio-inline white-text">
@@ -270,12 +271,12 @@ const Tabulation = () => {
           {state.tableData.map((row, idx) => {
             return (
               <tr key={idx}>
-                <th scope="row">{idx}</th>
+                <th scope="row">{idx + 1}</th>
                 <td>{row.kelas}</td>
                 <td>{row.ntengah}</td>
                 <td>{row.frek}</td>
-                <td>{row.frel} %</td>
-                <td>{row.frelp}</td>
+                <td>{row.frel}</td>
+                <td>{row.frelp} %</td>
                 <td>{row.fkumkur}</td>
                 <td>{row.fkumleb}</td>
               </tr>
