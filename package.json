@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "rm dist/bundle.js",
     "start": "parcel src/index.html",
-    "build-prod": "parcel build src/index.html"
+    "build:public": "parcel build src/index.html --out-dir ./../tools-kurang-penting-firebase/public && cd ../tools-kurang-penting-firebase && git add . && git commit -m \"build public\" && git push firebase deploy --only hosting"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
