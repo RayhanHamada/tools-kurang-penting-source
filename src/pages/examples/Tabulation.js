@@ -172,7 +172,8 @@ const Tabulation = () => {
       />
       <br />
       <span className="jumlah-data white-text" id="jumlah-data">
-        Banyak Data : <b>{state.banyakData}</b>, Jumlah Data: <b>{state.jumlahData}</b>
+        Banyak Data : <b>{state.banyakData}</b>, Jumlah Data:{" "}
+        <b>{state.jumlahData}</b>
       </span>
       <br />
       <span className="white-text">
@@ -217,9 +218,13 @@ const Tabulation = () => {
         {uiState.opsi2}
       </label>
       <br />
-      <span className="white-text">Range: <b>{state.range}</b></span>
+      <span className="white-text">
+        Range: <b>{state.range}</b>
+      </span>
       <br />
-      <span className="white-text">Interval : <b>{state.interval}</b></span>
+      <span className="white-text">
+        Interval : <b>{state.interval}</b>
+      </span>
       <br />
       <span className="white-text">Pilih Interval Yang Fix !</span>
       <label className="radio-inline white-text">
