@@ -5,8 +5,16 @@
   height: 100vh;
 }
 
+.wrapper-input {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .input-angka {
-  width: 30%;
+  width: 50%;
+  margin-right: 2%;
 }
 
 .radio-inline,

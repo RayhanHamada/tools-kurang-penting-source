@@ -161,15 +161,51 @@ const Tabulation = () => {
     setState({ ...state, tableData: rowContainer });
   };
 
+  const clearAllInput = () => {
+
+    setState({
+      data: [],
+      tableData: [],
+      jumlahData: 0,
+      banyakData: 0,
+      mean: 0,
+      median: 0,
+      banyakKelas: 0,
+      banyakKelasFix: 0,
+      min: 0,
+      max: 0,
+      range: 0,
+      interval: 0,
+      intervalFix: 0
+    });
+
+    setUiState({
+      opsi1: 0,
+      opsi2: 0,
+      intervalLow: 0,
+      intervalUp: 0,
+      opcheck: true,
+      intervalCheck: true
+    })
+
+    document.getElementById("input-angka").value = "";
+  }
+
   return (
     <div className="wrapper-tabulation">
-      <input
-        onChange={hitungJumlahData}
-        id="input-angka"
-        type="text"
-        className="input-angka form-control"
-        placeholder="Input himpunan angka, dipisahkan dengan koma"
-      />
+      <div className="wrapper-input">
+        <input
+          onChange={hitungJumlahData}
+          id="input-angka"
+          type="text"
+          className="input-angka form-control"
+          placeholder="Input himpunan angka, dipisahkan dengan koma"
+        />
+
+        <button className="btn btn-outline-primary" onClick={clearAllInput}>
+          Clear semua input
+        </button>
+      </div>
       <br />
       <span className="jumlah-data white-text" id="jumlah-data">
         Banyak Data : <b>{state.banyakData}</b>, Jumlah Data:{" "}
