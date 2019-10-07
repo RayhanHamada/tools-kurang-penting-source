@@ -6,7 +6,7 @@ import "./ToolBox.css";
 const ToolBox = ({ toolTitle, toolAuthor, toolDesc, toolTag }) => {
   return (
     <div className="box">
-      <Link to={`/use-tool/${toolTitle.split(/\s+/).join("")}`}>
+      <Link to={`/${toolTitle.split(/\s+/).join("")}`}>
         <span className="tool-title">{toolTitle}</span>
       </Link>
       <br />

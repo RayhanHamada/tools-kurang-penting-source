@@ -14,7 +14,7 @@ const HomePage = () => {
       </div>
       <div className="tools-list">
         <ToolBox
-          toolTitle="Distribusi Frekuensi"
+          toolTitle="Tabulasi"
           toolAuthor="Rayhan Hamada"
           toolDesc="Alat untuk menghitung distribusi frekuensi dan menyajikannya dalam tabel."
           toolTag={["Statistic", "Table"]}

@@ -11,17 +11,14 @@ const App = () => {
         <a className="navbrand" href=".">
           <span>Tools Kurang Penting</span>
         </a>
-        <p>
-          Anjay Mabar
-        </p>
+        <span style={{ textAlign: "end" }}>Anjay Mabar</span>
       </nav>
 
       <Switch>
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route path="/use-tool/:tool">
-          <br />
+        <Route path="/tabulasi">
           <Tabulation />
         </Route>
       </Switch>
