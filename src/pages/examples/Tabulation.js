@@ -62,29 +62,29 @@ const Tabulation = () => {
     const jk1 = document.getElementById("jk1");
     const jk2 = document.getElementById("jk2");
 
-    const banyakKelasFix = jk1.checked
-      ? parseInt(jk1.value)
-      : parseInt(jk2.value);
+    const banyakKelasFix = jk1.checked ? uiState.opsi1 : uiState.opsi2;
 
-    const interval = (range / banyakKelasFix).toPrecision(3);
+    const interval = (
+      range / (banyakKelasFix == 0 ? Math.ceil(banyakKelas) : banyakKelasFix)
+    ).toPrecision(3);
     // console.log(interval);
 
     const i1 = document.getElementById("i1");
-    const i2 = document.getElementById("i2");
 
-    const intervalFix = i1.checked ? parseInt(i1.value) : parseInt(i2.value);
+    const intervalFix = i1.checked ? uiState.intervalUp : uiState.intervalLow;
+    console.log(`${uiState.intervalLow}`);
 
     setState({
       ...state,
       data: [...numArray],
       banyakData: numArray.length,
-      banyakKelas: banyakKelas,
       jumlahData: jumlahData,
+      banyakKelas: banyakKelas,
+      banyakKelasFix: banyakKelasFix,
       max: max,
       min: min,
       range: range,
       interval: interval,
-      banyakKelasFix: banyakKelasFix,
       intervalFix: intervalFix
     });
 
@@ -194,10 +194,14 @@ const Tabulation = () => {
           value={uiState.opsi1}
           onClick={() => {
             setUiState({ ...uiState, opcheck: true });
-            setState({ ...state });
+            setState({
+              ...state,
+              banyakKelasFix: uiState.opsi1,
+              interval: (state.range / uiState.opsi1).toPrecision(3)
+            });
             hitungJumlahData();
-            bikinRecord();
           }}
+          defaultChecked
         />
         {uiState.opsi1}
       </label>
@@ -210,9 +214,12 @@ const Tabulation = () => {
           value={uiState.opsi2}
           onClick={() => {
             setUiState({ ...uiState, opcheck: !uiState.opcheck });
-            setState({ ...state });
+            setState({
+              ...state,
+              banyakKelasFix: uiState.opsi2,
+              interval: (state.range / uiState.opsi2).toPrecision(3)
+            });
             hitungJumlahData();
-            bikinRecord();
           }}
         />
         {uiState.opsi2}
@@ -233,14 +240,20 @@ const Tabulation = () => {
           id="i1"
           type="radio"
           name="optradio"
-          value={uiState.intervalLow}
+          value={uiState.intervalUp}
           onClick={() => {
             setUiState({ ...uiState, intervalCheck: true });
-            setState({ ...state });
+            setState({
+              ...state,
+              banyakKelasFix: uiState.opsi1,
+              interval: (state.range / uiState.opsi1).toPrecision(3)
+            });
+            setState({ ...state, intervalFix: uiState.intervalUp });
             hitungJumlahData();
           }}
+          defaultChecked
         />
-        {uiState.intervalLow}
+        {uiState.intervalUp}
       </label>
       <label className="radio-inline white-text">
         <input
@@ -248,16 +261,28 @@ const Tabulation = () => {
           id="i2"
           type="radio"
           name="optradio"
-          value={uiState.intervalUp}
+          value={uiState.intervalLow}
           onClick={() => {
             setUiState({ ...uiState, intervalCheck: !uiState.intervalCheck });
-            setState({ ...state });
+            setState({
+              ...state,
+              banyakKelasFix: uiState.opsi2,
+              interval: (state.range / uiState.opsi2).toPrecision(3)
+            });
+            setState({ ...state, intervalFix: uiState.intervalLow });
             hitungJumlahData();
           }}
         />
-        {uiState.intervalUp}
+        {uiState.intervalLow}
       </label>
       <br />
+      <button className="btn btn-outline-primary" onClick={hitungJumlahData}>
+        Hitung/Update Data
+      </button>
+      <br />
+      <button className="btn btn-outline-primary" onClick={bikinRecord}>
+        Tampilkan/Update Tabel
+      </button>
       <br />
       <table class="table table-bordered">
         <thead class="thead-dark">
@@ -289,7 +314,6 @@ const Tabulation = () => {
           })}
         </tbody>
       </table>
-      <button onClick={bikinRecord}>Test</button>
     </div>
   );
 };
